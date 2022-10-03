@@ -16,13 +16,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d4l-dm-X0O">
-                                <rect key="frame" x="157.66666666666666" y="321" width="75" height="35"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d4l-dm-X0O">
+                                <rect key="frame" x="157.66666666666666" y="327.33333333333331" width="75" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Button"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7RU-vc-vJo">
-                                <rect key="frame" x="157.66666666666666" y="405" width="75" height="34.333333333333314"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7RU-vc-vJo">
+                                <rect key="frame" x="157.66666666666666" y="411.33333333333331" width="75" height="34.333333333333314"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Button"/>
                             </button>
@@ -30,6 +30,8 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7RU-vc-vJo" secondAttribute="trailing" constant="157.33000000000001" id="dxl-Ad-mp6"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="d4l-dm-X0O" secondAttribute="trailing" constant="157.33000000000001" id="jtc-uJ-JCd"/>
                             <constraint firstItem="7RU-vc-vJo" firstAttribute="top" secondItem="d4l-dm-X0O" secondAttribute="bottom" constant="49" id="qcU-mo-DOM"/>
                             <constraint firstItem="7RU-vc-vJo" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="qpn-e7-EQ9"/>
                         </constraints>
