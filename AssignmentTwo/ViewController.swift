@@ -16,10 +16,12 @@ class ViewController: UIViewController {
     }
 
 
-    @IBAction func ModA(_ sender: UIButton) {
+    @IBAction func ModA(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        storyboard.instantiateViewController(withIdentifier: <#T##String#>)
         print("A clicked")
     }
-    @IBAction func ModB(_ sender: UIButton) {
+    @IBAction func ModB(_ sender: Any) {
         print("B clicked")
     }
 }
