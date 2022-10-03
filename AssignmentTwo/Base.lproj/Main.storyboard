@@ -21,6 +21,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Mod A"/>
                                 <connections>
+                                    <action selector="ModA:" destination="BYZ-38-t0r" eventType="touchUpInside" id="igg-Oz-sDY"/>
                                     <segue destination="2LK-DB-f2e" kind="show" id="kmA-H8-wiO"/>
                                 </connections>
                             </button>
@@ -29,6 +30,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Mod B"/>
                                 <connections>
+                                    <action selector="ModB:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jB3-SE-qch"/>
                                     <segue destination="hvR-Lj-ILi" kind="show" id="JFs-Dj-fLJ"/>
                                 </connections>
                             </button>

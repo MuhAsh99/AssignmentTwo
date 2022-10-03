@@ -12,11 +12,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-            //comment
-        //comment
-        //comment
+       
     }
 
 
+    @IBAction func ModA(_ sender: UIButton) {
+        print("A clicked")
+    }
+    @IBAction func ModB(_ sender: UIButton) {
+        print("B clicked")
+    }
 }
 
