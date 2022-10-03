@@ -30,10 +30,12 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="d4l-dm-X0O" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="157.66999999999999" id="WQK-O1-YM5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7RU-vc-vJo" secondAttribute="trailing" constant="157.33000000000001" id="dxl-Ad-mp6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="d4l-dm-X0O" secondAttribute="trailing" constant="157.33000000000001" id="jtc-uJ-JCd"/>
                             <constraint firstItem="7RU-vc-vJo" firstAttribute="top" secondItem="d4l-dm-X0O" secondAttribute="bottom" constant="49" id="qcU-mo-DOM"/>
                             <constraint firstItem="7RU-vc-vJo" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="qpn-e7-EQ9"/>
+                            <constraint firstItem="7RU-vc-vJo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="157.66999999999999" id="zuV-XD-dsk"/>
                         </constraints>
                     </view>
                 </viewController>
