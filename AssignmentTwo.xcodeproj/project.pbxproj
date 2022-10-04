@@ -17,6 +17,7 @@
 		5252141B28ECD7D400001FA3 /* FFTHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5252141A28ECD7D400001FA3 /* FFTHelper.m */; };
 		5252141E28ECD83400001FA3 /* CircularBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5252141D28ECD83400001FA3 /* CircularBuffer.m */; };
 		5252142128ECD88900001FA3 /* AudioFileReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5252142028ECD88900001FA3 /* AudioFileReader.m */; };
+		5252142428ECD92900001FA3 /* MetalGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5252142328ECD92900001FA3 /* MetalGraph.swift */; };
 		52989C8028EC71F4001AEDA5 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52989C7F28EC71F4001AEDA5 /* SecondViewController.swift */; };
 		52989C8228EC75A6001AEDA5 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52989C8128EC75A6001AEDA5 /* ThirdViewController.swift */; };
 /* End PBXBuildFile section */
@@ -39,6 +40,7 @@
 		5252141F28ECD84900001FA3 /* CircularBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CircularBuffer.h; sourceTree = "<group>"; };
 		5252142028ECD88900001FA3 /* AudioFileReader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioFileReader.m; sourceTree = "<group>"; };
 		5252142228ECD8B900001FA3 /* AudioFileReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioFileReader.h; sourceTree = "<group>"; };
+		5252142328ECD92900001FA3 /* MetalGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalGraph.swift; sourceTree = "<group>"; };
 		52989C7F28EC71F4001AEDA5 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		52989C8128EC75A6001AEDA5 /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,6 +88,7 @@
 				5228FA6528E3496800AA56A0 /* ViewController.swift */,
 				52989C7F28EC71F4001AEDA5 /* SecondViewController.swift */,
 				52989C8128EC75A6001AEDA5 /* ThirdViewController.swift */,
+				5252142328ECD92900001FA3 /* MetalGraph.swift */,
 				5228FA6728E3496800AA56A0 /* Main.storyboard */,
 				5228FA6A28E3496A00AA56A0 /* Assets.xcassets */,
 				5228FA6C28E3496A00AA56A0 /* LaunchScreen.storyboard */,
@@ -171,6 +174,7 @@
 				5228FA6628E3496800AA56A0 /* ViewController.swift in Sources */,
 				5252141E28ECD83400001FA3 /* CircularBuffer.m in Sources */,
 				5252141B28ECD7D400001FA3 /* FFTHelper.m in Sources */,
+				5252142428ECD92900001FA3 /* MetalGraph.swift in Sources */,
 				5252142128ECD88900001FA3 /* AudioFileReader.m in Sources */,
 				5252141828ECD6D700001FA3 /* Novocaine.m in Sources */,
 				52989C8228EC75A6001AEDA5 /* ThirdViewController.swift in Sources */,
