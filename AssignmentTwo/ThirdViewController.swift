@@ -10,10 +10,14 @@ import Metal
 
 class ThirdViewController: UIViewController {
     
-    // setup some constants we will use
-    struct AudioConstants{
-        static let AUDIO_BUFFER_SIZE = 1024*4
-    }
+    //take out for now
+    
+//    // setup some constants we will use
+//    struct AudioConstants{
+//        static let AUDIO_BUFFER_SIZE = 1024*4
+//    }
+    
+    //take out for now
     
     // setup audio model
     //take out for now
@@ -21,10 +25,13 @@ class ThirdViewController: UIViewController {
     
     //added
     let audio = AudioModel()
-    lazy var graph:MetalGraph? = {
-        return MetalGraph(userView: self.view)
-    }()
     
+    //take out for now
+    
+//    lazy var graph:MetalGraph? = {
+//        return MetalGraph(userView: self.view)
+//    }()
+//
 
 
     override func viewDidLoad() {
@@ -32,12 +39,14 @@ class ThirdViewController: UIViewController {
         
         self.isModalInPresentation = true
         
-        // add in a graph for displaying the audio
-        if let graph = self.graph {
-            graph.addGraph(withName: "time",
-                           numPointsInGraph: AudioConstants.AUDIO_BUFFER_SIZE)
-            graph.makeGrids()
-        }
+        //take out for now
+        
+//        // add in a graph for displaying the audio
+//        if let graph = self.graph {
+//            graph.addGraph(withName: "time",
+//                           numPointsInGraph: AudioConstants.AUDIO_BUFFER_SIZE)
+//            graph.makeGrids()
+//        }
         
         
         // start up the audio model here, querying microphone
@@ -45,11 +54,13 @@ class ThirdViewController: UIViewController {
 
         audio.play()
         
-        // run the loop for updating the graph peridocially
-        Timer.scheduledTimer(timeInterval: 0.05, target: self,
-            selector: #selector(self.updateGraph),
-            userInfo: nil,
-            repeats: true)
+        //take out for now
+        
+//        // run the loop for updating the graph peridocially
+//        Timer.scheduledTimer(timeInterval: 0.05, target: self,
+//            selector: #selector(self.updateGraph),
+//            userInfo: nil,
+//            repeats: true)
         
 
         
@@ -62,6 +73,8 @@ class ThirdViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    //take out for now
+    
 //    @objc
 //    func updateGraph(){
 //        // periodically, display the audio data
@@ -69,7 +82,7 @@ class ThirdViewController: UIViewController {
 //            data: self.audio.timeData,
 //            forKey: "time"
 //        )
-//        
+//
 //    }
     
 
