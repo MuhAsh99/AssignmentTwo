@@ -24,7 +24,7 @@ class ThirdViewController: UIViewController {
    // let audio = AudioModel(buffer_size: AudioConstants.AUDIO_BUFFER_SIZE)
     
     //added
-    let audio = AudioModel()
+   // let audio = AudioModel()
     
     //take out for now
     
@@ -39,7 +39,7 @@ class ThirdViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.isModalInPresentation = true
+        //self.isModalInPresentation = true
         
         //take out for now
         
@@ -52,9 +52,9 @@ class ThirdViewController: UIViewController {
         
         
         // start up the audio model here, querying microphone
-        audio.startMicrophoneProcessing()
+       // audio.startMicrophoneProcessing()
 
-        audio.play()
+       // audio.play()
         
         //take out for now
         
@@ -71,9 +71,9 @@ class ThirdViewController: UIViewController {
     }
     
 
-    @IBAction func doneButtonTapped2(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
+//    @IBAction func doneButtonTapped2(_ sender: Any) {
+//        dismiss(animated: true, completion: nil)
+//    }
     
     //take out for now
     

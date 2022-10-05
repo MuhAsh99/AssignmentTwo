@@ -26,7 +26,7 @@ class SecondViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.isModalInPresentation = true
+        //self.isModalInPresentation = true
         
         //adding functionality to read from mic
         
@@ -53,9 +53,9 @@ class SecondViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func doneButtonTapped(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
+//    @IBAction func doneButtonTapped(_ sender: Any) {
+//        dismiss(animated: true, completion: nil)
+//    }
     
 //    @objc
 //    func updateGraph(){
