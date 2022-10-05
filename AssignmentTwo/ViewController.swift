@@ -14,11 +14,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        audio.startMicrophoneProcessing()
+        
+        audio.play()
     }
 
-    audio.startMicrophoneProcessing()
     
-    audio.play()
 //
 //    @IBAction func ModA(_ sender: Any) {
 //        let storyboard = UIStoryboard(name: "Main",
