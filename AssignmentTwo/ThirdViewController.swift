@@ -32,6 +32,8 @@ class ThirdViewController: UIViewController {
 //        return MetalGraph(userView: self.view)
 //    }()
 //
+    
+    //NEVER DO THAT AGAIN
 
 
     override func viewDidLoad() {
