@@ -16,7 +16,11 @@ class ThirdViewController: UIViewController {
     }
     
     // setup audio model
-    let audio = AudioModel(buffer_size: AudioConstants.AUDIO_BUFFER_SIZE)
+    //take out for now
+   // let audio = AudioModel(buffer_size: AudioConstants.AUDIO_BUFFER_SIZE)
+    
+    //added
+    let audio = AudioModel()
     lazy var graph:MetalGraph? = {
         return MetalGraph(userView: self.view)
     }()
@@ -58,15 +62,15 @@ class ThirdViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    @objc
-    func updateGraph(){
-        // periodically, display the audio data
-        self.graph?.updateGraph(
-            data: self.audio.timeData,
-            forKey: "time"
-        )
-        
-    }
+//    @objc
+//    func updateGraph(){
+//        // periodically, display the audio data
+//        self.graph?.updateGraph(
+//            data: self.audio.timeData,
+//            forKey: "time"
+//        )
+//        
+//    }
     
 
 }
