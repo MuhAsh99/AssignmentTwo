@@ -29,18 +29,9 @@ class SecondViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let graph = self.graph{
-            graph.setBackgroundColor(r: 0, g: 0, b: 0, a: 1)
-            // add in graphs for display
-            graph.addGraph(withName: "fft",
-                            shouldNormalizeForFFT: true,
-                            numPointsInGraph: AudioConstants.AUDIO_BUFFER_SIZE/2)
-            
-            graph.addGraph(withName: "time",
-                numPointsInGraph: AudioConstants.AUDIO_BUFFER_SIZE)
-            
-            graph.makeGrids() // add grids to graph
-        }
+        
+        // uncomment this function if you want to show the graphs
+        showGraphs()
         
         // start up the audio model here, querying microphone
         audio.startMicrophoneProcessing(withFps: 10)
@@ -53,6 +44,21 @@ class SecondViewController: UIViewController {
             userInfo: nil,
             repeats: true)
        
+    }
+    
+    func showGraphs(){
+        if let graph = self.graph{
+            graph.setBackgroundColor(r: 0, g: 0, b: 0, a: 1)
+            // add in graphs for display
+            graph.addGraph(withName: "fft",
+                            shouldNormalizeForFFT: true,
+                            numPointsInGraph: AudioConstants.AUDIO_BUFFER_SIZE/2)
+
+            graph.addGraph(withName: "time",
+                numPointsInGraph: AudioConstants.AUDIO_BUFFER_SIZE)
+
+            graph.makeGrids() // add grids to graph
+        }
     }
     
     // periodically, update the graph with refreshed FFT Data
