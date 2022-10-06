@@ -4,7 +4,7 @@
 //
 //  Created by Eric Larson
 //  Copyright © 2020 Eric Larson. All rights reserved.
-//
+
 
 import UIKit
 import Metal
@@ -16,7 +16,7 @@ import Metal
 class SecondViewController: UIViewController {
 
     struct AudioConstants{
-        static let AUDIO_BUFFER_SIZE = 1024*4
+        static let AUDIO_BUFFER_SIZE = 1024*16 // This is the correct buffer size. Fight me and I'll bring the maths
     }
     
     // setup audio model
