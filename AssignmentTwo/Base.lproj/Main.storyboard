@@ -112,14 +112,37 @@
                     <view key="view" contentMode="scaleToFill" id="FZ0-5Y-PdO">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wdV-Ur-R1S">
+                                <rect key="frame" x="174" y="591" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="qKA-PF-oiO">
+                                <rect key="frame" x="56" y="652" width="278" height="31"/>
+                                <connections>
+                                    <action selector="freqSlider:" destination="hvR-Lj-ILi" eventType="valueChanged" id="Py4-xQ-Vuj"/>
+                                </connections>
+                            </slider>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="oqW-8r-fHc"/>
                         <color key="backgroundColor" systemColor="systemPurpleColor"/>
+                        <constraints>
+                            <constraint firstItem="wdV-Ur-R1S" firstAttribute="centerX" secondItem="FZ0-5Y-PdO" secondAttribute="centerX" id="B8e-px-WGL"/>
+                            <constraint firstItem="qKA-PF-oiO" firstAttribute="centerX" secondItem="FZ0-5Y-PdO" secondAttribute="centerX" id="KkP-sz-gaa"/>
+                            <constraint firstItem="qKA-PF-oiO" firstAttribute="top" secondItem="wdV-Ur-R1S" secondAttribute="bottom" constant="40" id="oul-hK-CpJ"/>
+                            <constraint firstItem="oqW-8r-fHc" firstAttribute="bottom" secondItem="qKA-PF-oiO" secondAttribute="bottom" constant="128" id="rC5-IB-RP4"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="R66-uD-zps"/>
+                    <connections>
+                        <outlet property="freqLabel" destination="wdV-Ur-R1S" id="bAg-4y-asi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mUG-08-dDU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="254" y="675"/>
+            <point key="canvasLocation" x="253.84615384615384" y="674.64454976303318"/>
         </scene>
     </scenes>
     <resources>
