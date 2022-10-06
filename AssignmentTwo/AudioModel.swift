@@ -17,6 +17,7 @@ class AudioModel {
     // the user can access these arrays at any time and plot them if they like
     var timeData:[Float]
     var fftData:[Float]
+    var highestFreq:[Float]
     
     // MARK: Public Methods
     init(buffer_size:Int) {
@@ -24,6 +25,7 @@ class AudioModel {
         // anything not lazily instatntiated should be allocated here
         timeData = Array.init(repeating: 0.0, count: BUFFER_SIZE)
         fftData = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
+        highestFreq = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
     }
     
     // public function for starting processing of microphone data
