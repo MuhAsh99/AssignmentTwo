@@ -1,91 +1,77 @@
 //
-//  ThirdViewController.swift
-//  AssignmentTwo
+//  ViewController.swift
+//  AudioLabSwift
 //
-//  Created by Muhammad Ashraf on 10/4/22.
-//
+//  Created by Eric Larson
+//  Copyright © 2020 Eric Larson. All rights reserved.
+
 
 import UIKit
 import Metal
 
+
+
+
+
 class ThirdViewController: UIViewController {
-    
-    //take out for now
-    
-//    // setup some constants we will use
-//    struct AudioConstants{
-//        static let AUDIO_BUFFER_SIZE = 1024*4
-//    }
-    
-    //take out for now
+
+    struct AudioConstants{
+        static let AUDIO_BUFFER_SIZE = 1024*16 // This is the correct buffer size. Fight me and I'll bring the maths
+    }
     
     // setup audio model
-    //take out for now
-   // let audio = AudioModel(buffer_size: AudioConstants.AUDIO_BUFFER_SIZE)
+    let audio = AudioModel(buffer_size: AudioConstants.AUDIO_BUFFER_SIZE)
+    lazy var graph:MetalGraph? = {
+        return MetalGraph(userView: self.view)
+    }()
     
-    //added
-   // let audio = AudioModel()
     
-    //take out for now
-    
-//    lazy var graph:MetalGraph? = {
-//        return MetalGraph(userView: self.view)
-//    }()
-//
-    
-    //NEVER DO THAT AGAIN
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //self.isModalInPresentation = true
-        
-        //take out for now
-        
-//        // add in a graph for displaying the audio
-//        if let graph = self.graph {
-//            graph.addGraph(withName: "time",
-//                           numPointsInGraph: AudioConstants.AUDIO_BUFFER_SIZE)
-//            graph.makeGrids()
-//        }
-        
+        if let graph = self.graph{
+            graph.setBackgroundColor(r: 0, g: 0, b: 0, a: 1)
+            // add in graphs for display
+            graph.addGraph(withName: "fft",
+                            shouldNormalizeForFFT: true,
+                            numPointsInGraph: AudioConstants.AUDIO_BUFFER_SIZE/2)
+            
+            graph.addGraph(withName: "time",
+                numPointsInGraph: AudioConstants.AUDIO_BUFFER_SIZE)
+            
+            graph.makeGrids() // add grids to graph
+        }
         
         // start up the audio model here, querying microphone
-       // audio.startMicrophoneProcessing()
+        audio.startMicrophoneProcessing(withFps: 10)
 
-       // audio.play()
+        audio.play()
         
-        //take out for now
-        
-//        // run the loop for updating the graph peridocially
-//        Timer.scheduledTimer(timeInterval: 0.05, target: self,
-//            selector: #selector(self.updateGraph),
-//            userInfo: nil,
-//            repeats: true)
-        
-
-        
-
-        // Do any additional setup after loading the view.
+        // run the loop for updating the graph peridocially
+        Timer.scheduledTimer(timeInterval: 0.05, target: self,
+            selector: #selector(self.updateGraph),
+            userInfo: nil,
+            repeats: true)
+       
     }
     
-
-//    @IBAction func doneButtonTapped2(_ sender: Any) {
-//        dismiss(animated: true, completion: nil)
-//    }
+    // periodically, update the graph with refreshed FFT Data
+    @objc
+    func updateGraph(){
+        self.graph?.updateGraph(
+            data: self.audio.fftData,
+            forKey: "fft"
+        )
+        
+        self.graph?.updateGraph(
+            data: self.audio.timeData,
+            forKey: "time"
+        )
+        
+        
+        
+    }
     
-    //take out for now
-    
-//    @objc
-//    func updateGraph(){
-//        // periodically, display the audio data
-//        self.graph?.updateGraph(
-//            data: self.audio.timeData,
-//            forKey: "time"
-//        )
-//
-//    }
     
 
 }
