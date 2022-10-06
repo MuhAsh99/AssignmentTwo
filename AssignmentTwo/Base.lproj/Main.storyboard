@@ -121,6 +121,9 @@
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="qKA-PF-oiO">
                                 <rect key="frame" x="56" y="652" width="278" height="31"/>
+                                <connections>
+                                    <action selector="freqSlider:" destination="hvR-Lj-ILi" eventType="valueChanged" id="Py4-xQ-Vuj"/>
+                                </connections>
                             </slider>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="oqW-8r-fHc"/>
@@ -133,6 +136,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="R66-uD-zps"/>
+                    <connections>
+                        <outlet property="freqLabel" destination="wdV-Ur-R1S" id="bAg-4y-asi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mUG-08-dDU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -44,6 +44,9 @@ class ThirdViewController: UIViewController {
         
         // start up the audio model here, querying microphone
         audio.startMicrophoneProcessing(withFps: 10)
+        
+        //function for playing sin wave
+        audio.startProcessingSinewaveForPlayback()
 
         audio.play()
         
@@ -54,6 +57,14 @@ class ThirdViewController: UIViewController {
             repeats: true)
        
     }
+    
+    //slider and label added for frequency of in-audible tone
+    @IBOutlet weak var freqLabel: UILabel!
+    @IBAction func freqSlider(_ sender: UISlider) {
+        self.audio.sineFrequency = sender.value
+        freqLabel.text = "Frequency: \(sender.value)"
+    }
+    
     
     // periodically, update the graph with refreshed FFT Data
     @objc
