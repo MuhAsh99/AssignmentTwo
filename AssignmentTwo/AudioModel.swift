@@ -39,7 +39,6 @@ class AudioModel {
             //   the swift code for loop is slightly slower thatn doing this in c,
             //   but the implementations are very similar
             if let manager = self.audioManager{
-
                 if USE_C_SINE {
                     // c for loop
                     manager.setOutputBlockToPlaySineWave(sineFrequency)
@@ -99,6 +98,30 @@ class AudioModel {
     
     //==========================================
     // MARK: Model Callback Methods
+    
+    private func takeWindowedAverageOfFFT(windowSize:Int){
+        // iterate over every value of the fft
+        for i in 0...((BUFFER_SIZE/2) - 1 - windowSize) {
+            var highest = fftData[i]
+            
+            // iterate over every index in the window in the fft
+            for index in i...(i+windowSize) {
+                // if the value in the window is higher than the highest value, set it
+                if (fftData[index] > highest) {
+                    highest = fftData[index]
+                }
+            }
+            
+            //at the end of the window, set the value at that index to the highest found in that window
+            highestFreq[i] = highest
+        }
+        // set the last (windowSize) elements
+        let setMe = highestFreq[(BUFFER_SIZE/2)-1 - windowSize]
+        for i in ((BUFFER_SIZE/2) - windowSize)...((BUFFER_SIZE/2)-1){
+            highestFreq[i] = setMe
+        }
+    }
+    
     @objc
     private func runEveryInterval(){
         if inputBuffer != nil {
@@ -114,7 +137,7 @@ class AudioModel {
             //   timeData: the raw audio samples
             //   fftData:  the FFT of those same samples
             // the user can now use these variables however they like
-            
+            self.takeWindowedAverageOfFFT(windowSize:10)
         }
     }
     

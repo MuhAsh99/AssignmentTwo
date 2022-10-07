@@ -56,6 +56,8 @@ class SecondViewController: UIViewController {
 
             graph.addGraph(withName: "time",
                 numPointsInGraph: AudioConstants.AUDIO_BUFFER_SIZE)
+            
+            graph.addGraph(withName: "avg", numPointsInGraph: AudioConstants.AUDIO_BUFFER_SIZE/2)
 
             graph.makeGrids() // add grids to graph
         }
@@ -74,7 +76,7 @@ class SecondViewController: UIViewController {
             forKey: "time"
         )
         
-        
+        self.graph?.updateGraph(data: self.audio.highestFreq, forKey: "avg")
         
     }
     
