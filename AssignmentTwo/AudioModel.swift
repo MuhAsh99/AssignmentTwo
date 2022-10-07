@@ -93,7 +93,16 @@ class AudioModel {
         // To do this, we just divide our sampling rate of 24000 by the size of our fft array
         // and then multiply that number by our index
         let stride = ( (Float(24000)) / (Float((BUFFER_SIZE/2))) )
-        return (Float(stride) * Float(highestIndex))
+        
+        // find the index of the peak
+        // take the beginning and the end of the window of size 10
+//        let endIndex = highestIndex+9
+//        let midIndex = highestIndex+4
+        
+        // now use the equation to find the approximate middle index
+        
+        
+        return (Float(stride) * (Float(highestIndex)) )
     }
     
     //==========================================
@@ -121,23 +130,33 @@ class AudioModel {
     
     private func takeWindowedAverageOfFFT(windowSize:Int){
         // iterate over every value of the fft
-        for i in 0...((BUFFER_SIZE/2) - 1 - windowSize) {
+        for i in (windowSize/2)...((BUFFER_SIZE/2) - 1 - (windowSize/2)) {
             var highest = fftData[i]
             
-            // iterate over every index in the window in the fft
-            for index in i...(i+windowSize) {
+            // Check the values windowSize/2 below and windowSize/2 above
+            for x in 1...(windowSize/2) {
                 // if the value in the window is higher than the highest value, set it
-                if (fftData[index] > highest) {
-                    highest = fftData[index]
+                if (fftData[i-x] > highest) {
+                    highest = fftData[i-x]
+                }
+                if (fftData[i+x] > highest) {
+                    highest = fftData[i-x]
                 }
             }
             
             //at the end of the window, set the value at that index to the highest found in that window
             highestFreq[i] = highest
         }
-        // set the last (windowSize) elements
-        let setMe = highestFreq[(BUFFER_SIZE/2)-1 - windowSize]
-        for i in ((BUFFER_SIZE/2) - windowSize)...((BUFFER_SIZE/2)-1){
+        
+        // set the first (windowSize/2) elements
+        let setMeBegin = highestFreq[windowSize/2]
+        for i in 0...((windowSize/2) - 1){
+            highestFreq[i] = setMeBegin
+        }
+        
+        // set the last (windowSize/2) elements
+        let setMe = highestFreq[(BUFFER_SIZE/2)-1 - windowSize/2]
+        for i in ((BUFFER_SIZE/2) - windowSize/2)...((BUFFER_SIZE/2)-1){
             highestFreq[i] = setMe
         }
     }
