@@ -10,13 +10,14 @@ import UIKit
 import Metal
 
 
-
-
-
 class SecondViewController: UIViewController {
 
+    @IBOutlet weak var FrequencyLabel: UILabel!
+    
     struct AudioConstants{
-        static let AUDIO_BUFFER_SIZE = 1024*16 // This is the correct buffer size. Fight me and I'll bring the maths
+        // This is the correct buffer size. Fight me and I'll bring the maths
+//        static let AUDIO_BUFFER_SIZE = 16384 // or 1024*16 //
+        static let AUDIO_BUFFER_SIZE = 32768 // experimental buffer size
     }
     
     // setup audio model
@@ -29,21 +30,29 @@ class SecondViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         // uncomment this function if you want to show the graphs
-        showGraphs()
+//        showGraphs()
         
         // start up the audio model here, querying microphone
         audio.startMicrophoneProcessing(withFps: 10)
 
         audio.play()
         
-        // run the loop for updating the graph peridocially
+        // set up the Frequency to update constantly
+        setupFreq()
+    }
+    
+    // periodically, update the displayed frequency
+    @objc
+    func updateFreq(){
+        FrequencyLabel.text = String(self.audio.getHighestAmplitudeFrequency())
+    }
+    
+    func setupFreq(){
         Timer.scheduledTimer(timeInterval: 0.05, target: self,
-            selector: #selector(self.updateGraph),
+            selector: #selector(self.updateFreq),
             userInfo: nil,
             repeats: true)
-       
     }
     
     func showGraphs(){
@@ -61,6 +70,12 @@ class SecondViewController: UIViewController {
 
             graph.makeGrids() // add grids to graph
         }
+        
+        // run the loop for updating the graph peridocially
+        Timer.scheduledTimer(timeInterval: 0.05, target: self,
+            selector: #selector(self.updateGraph),
+            userInfo: nil,
+            repeats: true)
     }
     
     // periodically, update the graph with refreshed FFT Data

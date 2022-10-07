@@ -74,6 +74,27 @@ class AudioModel {
         }
     }
     
+    // Function which returns the frequency in the windowed average
+    // of the highest amplitude frequency
+    func getHighestAmplitudeFrequency() -> Float{
+        // store the highest value. Starts with the first value in the array
+        var highest = highestFreq[0]
+        var highestIndex = 0
+        // skip the first element since it is already set to highest here, then loop over all indices of highestFreq
+        for i in 1...((BUFFER_SIZE/2) - 1){
+            // if the new value is higher than our stored one
+            if (highestFreq[i] > highest){
+                highest = highestFreq[i]
+                highestIndex = i
+            }
+        }
+        
+        // Calculate the frequency of the highest index
+        // To do this, we just divide our sampling rate of 24000 by the size of our fft array
+        // and then multiply that number by our index
+        let stride = ( (Float(24000)) / (Float((BUFFER_SIZE/2))) )
+        return (Float(stride) * Float(highestIndex))
+    }
     
     //==========================================
     // MARK: Private Properties
@@ -90,7 +111,6 @@ class AudioModel {
         return CircularBuffer.init(numChannels: Int64(self.audioManager!.numInputChannels),
                                    andBufferSize: Int64(BUFFER_SIZE))
     }()
-    
     
     //==========================================
     // MARK: Private Methods

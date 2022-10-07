@@ -96,10 +96,26 @@
                     <view key="view" contentMode="scaleToFill" id="6ci-kU-xt8">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is a Test of A Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfb-wI-Ft5">
+                                <rect key="frame" x="20" y="412" width="350" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="dhN-RV-WL5"/>
                         <color key="backgroundColor" systemColor="systemPinkColor"/>
+                        <constraints>
+                            <constraint firstItem="wfb-wI-Ft5" firstAttribute="leading" secondItem="dhN-RV-WL5" secondAttribute="leading" constant="20" id="1Gp-Dt-hnz"/>
+                            <constraint firstItem="dhN-RV-WL5" firstAttribute="bottom" secondItem="wfb-wI-Ft5" secondAttribute="bottom" constant="377" id="gQm-HY-Ic8"/>
+                            <constraint firstItem="dhN-RV-WL5" firstAttribute="trailing" secondItem="wfb-wI-Ft5" secondAttribute="trailing" constant="20" id="sUf-dr-3C3"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="RWd-0N-6Q5"/>
+                    <connections>
+                        <outlet property="FrequencyLabel" destination="wfb-wI-Ft5" id="tby-aK-6Yh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wyo-2f-Ke9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
