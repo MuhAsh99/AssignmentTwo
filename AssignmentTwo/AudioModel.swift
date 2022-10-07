@@ -237,7 +237,7 @@ class AudioModel {
         self.inputBuffer?.addNewFloatData(data, withNumSamples: Int64(numFrames))
     }
     
-    var sineFrequency:Float = 0.0 { // frequency in Hz (changeable by user)
+    var sineFrequency:Float = 18.0 { // frequency in Hz (changeable by user)
             didSet{
 
                 if let manager = self.audioManager {

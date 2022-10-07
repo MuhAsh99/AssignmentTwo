@@ -40,15 +40,18 @@ class ThirdViewController: UIViewController {
                 numPointsInGraph: AudioConstants.AUDIO_BUFFER_SIZE)
             
             graph.makeGrids() // add grids to graph
+            
+            // start up the audio model here, querying microphone
+            audio.startMicrophoneProcessing(withFps: 10)
+            
+            //function for playing sin wave
+            //setting frequency to middle value of range
+            audio.startProcessingSinewaveForPlayback(withFreq: 20000)
+
+            audio.play()
         }
         
-        // start up the audio model here, querying microphone
-        audio.startMicrophoneProcessing(withFps: 10)
-        
-        //function for playing sin wave
-        audio.startProcessingSinewaveForPlayback()
-
-        audio.play()
+       
         
         // run the loop for updating the graph peridocially
         Timer.scheduledTimer(timeInterval: 0.05, target: self,
@@ -61,8 +64,8 @@ class ThirdViewController: UIViewController {
     //slider and label added for frequency of in-audible tone
     @IBOutlet weak var freqLabel: UILabel!
     @IBAction func freqSlider(_ sender: UISlider) {
-        self.audio.sineFrequency = sender.value
-        freqLabel.text = "Frequency: \(sender.value)"
+       //display value of freq
+        freqLabel.text = "Frequency: \(sender.value/1000)"
     }
     
     

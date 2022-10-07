@@ -139,14 +139,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wdV-Ur-R1S">
-                                <rect key="frame" x="174" y="591" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frequency" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wdV-Ur-R1S">
+                                <rect key="frame" x="154.66666666666666" y="331" width="80.666666666666657" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="qKA-PF-oiO">
-                                <rect key="frame" x="56" y="652" width="278" height="31"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="15000" minValue="15000" maxValue="20000" translatesAutoresizingMaskIntoConstraints="NO" id="qKA-PF-oiO">
+                                <rect key="frame" x="23" y="407" width="344" height="31"/>
                                 <connections>
                                     <action selector="freqSlider:" destination="hvR-Lj-ILi" eventType="valueChanged" id="Py4-xQ-Vuj"/>
                                 </connections>
@@ -155,10 +155,11 @@
                         <viewLayoutGuide key="safeArea" id="oqW-8r-fHc"/>
                         <color key="backgroundColor" systemColor="systemPurpleColor"/>
                         <constraints>
-                            <constraint firstItem="wdV-Ur-R1S" firstAttribute="centerX" secondItem="FZ0-5Y-PdO" secondAttribute="centerX" id="B8e-px-WGL"/>
-                            <constraint firstItem="qKA-PF-oiO" firstAttribute="centerX" secondItem="FZ0-5Y-PdO" secondAttribute="centerX" id="KkP-sz-gaa"/>
-                            <constraint firstItem="qKA-PF-oiO" firstAttribute="top" secondItem="wdV-Ur-R1S" secondAttribute="bottom" constant="40" id="oul-hK-CpJ"/>
-                            <constraint firstItem="oqW-8r-fHc" firstAttribute="bottom" secondItem="qKA-PF-oiO" secondAttribute="bottom" constant="128" id="rC5-IB-RP4"/>
+                            <constraint firstItem="oqW-8r-fHc" firstAttribute="trailing" secondItem="qKA-PF-oiO" secondAttribute="trailing" constant="25" id="95j-hL-9x2"/>
+                            <constraint firstItem="qKA-PF-oiO" firstAttribute="leading" secondItem="oqW-8r-fHc" secondAttribute="leading" constant="25" id="Sse-vt-SC1"/>
+                            <constraint firstItem="wdV-Ur-R1S" firstAttribute="top" secondItem="oqW-8r-fHc" secondAttribute="top" constant="240" id="U33-ca-7Ye"/>
+                            <constraint firstItem="qKA-PF-oiO" firstAttribute="centerY" secondItem="FZ0-5Y-PdO" secondAttribute="centerY" id="pfR-WH-7uR"/>
+                            <constraint firstItem="wdV-Ur-R1S" firstAttribute="centerX" secondItem="FZ0-5Y-PdO" secondAttribute="centerX" id="vSm-4Y-91h"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="R66-uD-zps"/>
