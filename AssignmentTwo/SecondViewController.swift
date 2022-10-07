@@ -11,7 +11,8 @@ import Metal
 
 
 class SecondViewController: UIViewController {
-
+    @IBOutlet weak var SecondFrequencyLabel: UILabel!
+    
     @IBOutlet weak var FrequencyLabel: UILabel!
     
     struct AudioConstants{
@@ -45,7 +46,10 @@ class SecondViewController: UIViewController {
     // periodically, update the displayed frequency
     @objc
     func updateFreq(){
-        FrequencyLabel.text = String(self.audio.getHighestAmplitudeFrequency())
+        let array = self.audio.getHighestAmplitudeFrequency()
+        FrequencyLabel.text = String(array[0])
+        
+        SecondFrequencyLabel.text = String(array[1])
     }
     
     func setupFreq(){

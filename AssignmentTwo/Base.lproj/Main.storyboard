@@ -103,11 +103,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XIf-Fs-A2D">
+                                <rect key="frame" x="20" y="344" width="350" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dhN-RV-WL5"/>
                         <color key="backgroundColor" systemColor="systemPinkColor"/>
                         <constraints>
                             <constraint firstItem="wfb-wI-Ft5" firstAttribute="leading" secondItem="dhN-RV-WL5" secondAttribute="leading" constant="20" id="1Gp-Dt-hnz"/>
+                            <constraint firstItem="dhN-RV-WL5" firstAttribute="trailing" secondItem="XIf-Fs-A2D" secondAttribute="trailing" constant="20" id="2eH-U6-DPb"/>
+                            <constraint firstItem="XIf-Fs-A2D" firstAttribute="leading" secondItem="dhN-RV-WL5" secondAttribute="leading" constant="20" id="9d8-07-HYv"/>
+                            <constraint firstItem="wfb-wI-Ft5" firstAttribute="top" secondItem="XIf-Fs-A2D" secondAttribute="bottom" constant="47" id="U3s-7u-TJW"/>
                             <constraint firstItem="dhN-RV-WL5" firstAttribute="bottom" secondItem="wfb-wI-Ft5" secondAttribute="bottom" constant="377" id="gQm-HY-Ic8"/>
                             <constraint firstItem="dhN-RV-WL5" firstAttribute="trailing" secondItem="wfb-wI-Ft5" secondAttribute="trailing" constant="20" id="sUf-dr-3C3"/>
                         </constraints>
@@ -115,11 +124,12 @@
                     <navigationItem key="navigationItem" id="RWd-0N-6Q5"/>
                     <connections>
                         <outlet property="FrequencyLabel" destination="wfb-wI-Ft5" id="tby-aK-6Yh"/>
+                        <outlet property="SecondFrequencyLabel" destination="XIf-Fs-A2D" id="oTk-5s-9QW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wyo-2f-Ke9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="255" y="-28"/>
+            <point key="canvasLocation" x="149" y="-28"/>
         </scene>
         <!--Third View Controller-->
         <scene sceneID="KK0-3N-NPs">
