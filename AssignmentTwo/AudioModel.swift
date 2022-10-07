@@ -21,7 +21,7 @@ class AudioModel {
     // the user can access these arrays at any time and plot them if they like
     var timeData:[Float]
     var fftData:[Float]
-    var highestFreq:[Float]
+    var windowedMaxArray:[Float]
     
 
     
@@ -31,7 +31,7 @@ class AudioModel {
         // anything not lazily instatntiated should be allocated here
         timeData = Array.init(repeating: 0.0, count: BUFFER_SIZE)
         fftData = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
-        highestFreq = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
+        windowedMaxArray = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
         stride = ( (Float(24000)) / (Float((BUFFER_SIZE/2))) )
     }
     
@@ -100,49 +100,38 @@ class AudioModel {
 //    }
     
     // Function which returns the frequency in the windowed average
-    // of the highest amplitude frequency
-    func getHighestAmplitudeFrequency() -> [Float] {
+    // of the highest amplitude frequency, with minAmplitude as the minimum amplitude required. Default is -1000
+    func getHighestAmplitudeFrequency(minAmplitude: Float=(Float(-1000))) -> [Float] {
         // store the highest value. Starts with the first value in the array
-        var highestCurrentFrequency = getFreqFromIndex(index: 0)
-        var highestCurrentAmplitude = highestFreq[0]
+        var highestCurrentFrequency = Float(0)
+        var highestCurrentAmplitude = minAmplitude
         
-        var secondHighestCurrentFrequency = getFreqFromIndex(index: 0)
-        var secondHighestAmplitude = highestFreq[0]
+        var secondHighestCurrentFrequency = Float(0)
+        var secondHighestAmplitude = minAmplitude
         
         
         // skip the first element since it is already set to highest here, then loop over all indices of highestFreq
-//        for i in 1...((BUFFER_SIZE/2) - 1){
-//            // if the new value is higher than our stored one
-//            if (highestFreq[i] > highestAmplitude && getFreqFromIndex(index: i) > highestCurrentFrequency){
-//                highestCurrentFrequency = getFreqFromIndex(index: i)
-//                highestAmplitude = highestFreq[i]
-//            }
-////            else if (highestFreq[i] > 0 && ((getFreqFromIndex(index: secondIndex) + 50) < (getFreqFromIndex(index: highestIndex)) || (getFreqFromIndex(index: secondIndex) - 50) > getFreqFromIndex(index: highestIndex))){
-//            else if (highestFreq[i] > secondHighestAmplitude && (getFreqFromIndex(index: i) > secondHighestCurrentFrequency) && ((secondHighestCurrentFrequency + Float(50)) < highestCurrentFrequency)) {
-//                secondHighestCurrentFrequency = getFreqFromIndex(index: i)
-//                secondHighestAmplitude = highestFreq[i]
-//            }
-//        }
-        
         // Find the highest Freq
-        for i in 1...((BUFFER_SIZE/2) - 1){
+        for i in 0...((BUFFER_SIZE/2) - 1){
             let currFreq = getFreqFromIndex(index: i)
-            if (highestFreq[i] > highestCurrentAmplitude && currFreq > highestCurrentFrequency){
-                highestCurrentAmplitude = highestFreq[i]
+            // if this index amplitude is greater than the stored one, and the frequency is higher as well, store the frequency and the amplitude
+            if (windowedMaxArray[i] > highestCurrentAmplitude && currFreq > highestCurrentFrequency){
+                highestCurrentAmplitude = windowedMaxArray[i]
                 highestCurrentFrequency = currFreq
             }
         }
         
         // Find the second highest Freq
-        for i in 1...((BUFFER_SIZE/2) - 1){
+        for i in 0...((BUFFER_SIZE/2) - 1){
             let currFreq = getFreqFromIndex(index: i)
-            if (highestFreq[i] > secondHighestAmplitude && currFreq > secondHighestCurrentFrequency && (currFreq + 50) < highestCurrentFrequency){
-                secondHighestAmplitude = highestFreq[i]
+            // if this index amplitude is greater than the stored one, and the frequency is higher as well, yet still smaller than the highest frequency by at least 48 (to make sure it is another frequency), store the frequency and the amplitude
+            if (windowedMaxArray[i] > secondHighestAmplitude && currFreq > secondHighestCurrentFrequency && (currFreq + 48) < highestCurrentFrequency){
+                secondHighestAmplitude = windowedMaxArray[i]
                 secondHighestCurrentFrequency = currFreq
             }
         }
-        
-        // Calculate the frequency of the highest index
+        print(highestCurrentAmplitude)
+        // return the two highest frequencies
         return [highestCurrentFrequency, secondHighestCurrentFrequency]
     }
     
@@ -176,7 +165,8 @@ class AudioModel {
     //==========================================
     // MARK: Model Callback Methods
     
-    private func takeWindowedAverageOfFFT(windowSize:Int){
+    // Take a windowed max of the fft, checking 5 in front and behind
+    private func takeWindowedMaxOfFFT(windowSize:Int){
         // iterate over every value of the fft
         for i in (windowSize/2)...((BUFFER_SIZE/2) - 1 - (windowSize/2)) {
             var highest = fftData[i]
@@ -193,19 +183,19 @@ class AudioModel {
             }
             
             //at the end of the window, set the value at that index to the highest found in that window
-            highestFreq[i] = highest
+            windowedMaxArray[i] = highest
         }
         
         // set the first (windowSize/2) elements
-        let setMeBegin = highestFreq[windowSize/2]
+        let setMeBegin = windowedMaxArray[windowSize/2]
         for i in 0...((windowSize/2) - 1){
-            highestFreq[i] = setMeBegin
+            windowedMaxArray[i] = setMeBegin
         }
         
         // set the last (windowSize/2) elements
-        let setMe = highestFreq[(BUFFER_SIZE/2)-1 - windowSize/2]
+        let setMe = windowedMaxArray[(BUFFER_SIZE/2)-1 - windowSize/2]
         for i in ((BUFFER_SIZE/2) - windowSize/2)...((BUFFER_SIZE/2)-1){
-            highestFreq[i] = setMe
+            windowedMaxArray[i] = setMe
         }
     }
     
@@ -224,7 +214,7 @@ class AudioModel {
             //   timeData: the raw audio samples
             //   fftData:  the FFT of those same samples
             // the user can now use these variables however they like
-            self.takeWindowedAverageOfFFT(windowSize:50)
+            self.takeWindowedMaxOfFFT(windowSize:50)
         }
     }
     
