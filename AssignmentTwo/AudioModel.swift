@@ -17,6 +17,11 @@ class AudioModel {
     private let USE_C_SINE = false
     
     private let stride:Float
+    
+    // The values left and right of the target frequency being used
+    // for hand movement detection
+    private var leftDopplerAverage:Float
+    private var rightDopplerAverage:Float
     // thse properties are for interfaceing with the API
     // the user can access these arrays at any time and plot them if they like
     var timeData:[Float]
@@ -28,6 +33,8 @@ class AudioModel {
     // MARK: Public Methods
     init(buffer_size:Int) {
         BUFFER_SIZE = buffer_size
+        leftDopplerAverage = 0
+        rightDopplerAverage = 0
         // anything not lazily instatntiated should be allocated here
         timeData = Array.init(repeating: 0.0, count: BUFFER_SIZE)
         fftData = Array.init(repeating: 0.0, count: BUFFER_SIZE/2)
@@ -37,7 +44,7 @@ class AudioModel {
     
     //using this for creating an in-audible sound
     func startProcessingSinewaveForPlayback(withFreq:Float=330.0){
-            sineFrequency = withFreq
+        self.sineFrequency = withFreq
             // Two examples are given that use either objective c or that use swift
             //   the swift code for loop is slightly slower thatn doing this in c,
             //   but the implementations are very similar
@@ -45,9 +52,23 @@ class AudioModel {
                 if USE_C_SINE {
                     // c for loop
                     manager.setOutputBlockToPlaySineWave(sineFrequency)
+                    
+                    // Take a snapshot of the fft data around the played frequency a second
+                    // after it is played
+                    Timer.scheduledTimer(timeInterval: 1.0, target: self,
+                        selector: #selector(self.getDopplerBaseline),
+                        userInfo: nil,
+                        repeats: false)
                 }else{
                     // swift for loop
                     manager.outputBlock = self.handleSpeakerQueryWithSinusoid
+                    
+                    // Take a snapshot of the fft data around the played frequency a second
+                    // after it is played
+                    Timer.scheduledTimer(timeInterval: 1.0, target: self,
+                        selector: #selector(self.getDopplerBaseline),
+                        userInfo: nil,
+                        repeats: false)
                 }
 
 
@@ -77,6 +98,7 @@ class AudioModel {
         }
     }
     
+    // Pause all audio functions
     func pause(){
         if let manager = self.audioManager{
             manager.pause()
@@ -135,11 +157,37 @@ class AudioModel {
         return [highestCurrentFrequency, secondHighestCurrentFrequency]
     }
     
+    // Guesses the motion infront of the phone by comparing the current FFT of the mic data
+    // against a snapshot when the tone initially played
+    // 0 = no motion, 1 = moving away, 2 = moving towards
+    func getHandMotion() -> Int{
+        let freq_index = getIndexFromFreq(frequency: sineFrequency)
+        let left = getAverageOverWindow(start_index: freq_index-101)
+        let right = getAverageOverWindow(start_index: freq_index+1)
+        let left_diff = left-leftDopplerAverage
+        let right_diff = right-rightDopplerAverage
+        let diff = left_diff - right_diff
+        if (diff < 2.5 && diff > -2.5) {
+            return 0
+        } else if (left_diff > right_diff) {
+            return 1
+        } else if (right_diff > left_diff) {
+            return 2
+        }
+        return 0
+    }
+    
     // This function calculates the frequency given an index
     // To do this, we just divide our sampling rate of 24000 by the size of our fft array
     // and then multiply that number by our index
     func getFreqFromIndex(index:Int) -> Float{
         return (Float(stride) * (Float(index)) )
+    }
+    
+    // This function calculates the index given a frequency
+    // To do this, we just divide the frequency by the sampling rate divided by the size of the fft array
+    func getIndexFromFreq(frequency:Float) -> Int{
+        return (Int)(frequency/Float(stride))
     }
     
     //==========================================
@@ -199,6 +247,22 @@ class AudioModel {
         }
     }
     
+    // Get the average of particular window in the FFT
+    private func getAverageOverWindow(start_index:Int=0) -> Float{
+        var sum:Float = 0
+        for i in start_index..<start_index+100 {
+            sum += fftData[i]
+        }
+        return sum/100
+    }
+    
+    // Get the averages to the left and right of played frequency
+    @objc private func getDopplerBaseline(){
+        let freq_index = getIndexFromFreq(frequency: sineFrequency)
+        self.leftDopplerAverage = getAverageOverWindow(start_index: freq_index-101)
+        self.rightDopplerAverage = getAverageOverWindow(start_index: freq_index+1)
+    }
+    
     @objc
     private func runEveryInterval(){
         if inputBuffer != nil {
@@ -215,6 +279,7 @@ class AudioModel {
             //   fftData:  the FFT of those same samples
             // the user can now use these variables however they like
             self.takeWindowedMaxOfFFT(windowSize:50)
+            
         }
     }
     

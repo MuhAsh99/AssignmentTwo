@@ -185,7 +185,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="15000" minValue="15000" maxValue="20000" translatesAutoresizingMaskIntoConstraints="NO" id="qKA-PF-oiO">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="19000" minValue="18000" maxValue="20000" translatesAutoresizingMaskIntoConstraints="NO" id="qKA-PF-oiO">
                                 <rect key="frame" x="23" y="407" width="344" height="31"/>
                                 <connections>
                                     <action selector="freqSlider:" destination="hvR-Lj-ILi" eventType="valueChanged" id="Py4-xQ-Vuj"/>

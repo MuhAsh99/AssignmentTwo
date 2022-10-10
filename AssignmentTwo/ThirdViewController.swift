@@ -34,7 +34,7 @@ class ThirdViewController: UIViewController {
             // add in graphs for display
             graph.addGraph(withName: "fft",
                             shouldNormalizeForFFT: true,
-                            numPointsInGraph: AudioConstants.AUDIO_BUFFER_SIZE/2)
+                            numPointsInGraph: 720)
             
             graph.addGraph(withName: "time",
                 numPointsInGraph: AudioConstants.AUDIO_BUFFER_SIZE)
@@ -46,7 +46,7 @@ class ThirdViewController: UIViewController {
             
             //function for playing sin wave
             //setting frequency to middle value of range
-            audio.startProcessingSinewaveForPlayback(withFreq: 20000)
+            audio.startProcessingSinewaveForPlayback(withFreq: 19000)
 
             audio.play()
         }
@@ -58,14 +58,35 @@ class ThirdViewController: UIViewController {
             selector: #selector(self.updateGraph),
             userInfo: nil,
             repeats: true)
-       
+        
+        // Check for motion periodically
+        Timer.scheduledTimer(timeInterval: 0.08, target: self,
+            selector: #selector(self.updateMotion),
+            userInfo: nil,
+            repeats: true)
     }
     
-    //slider and label added for frequency of in-audible tone
+    //slider and label added for frequency of in-audible tone and motion detection
     @IBOutlet weak var freqLabel: UILabel!
     @IBAction func freqSlider(_ sender: UISlider) {
-       //display value of freq
-        freqLabel.text = "Frequency: \(sender.value/1000)"
+       //change frequency being played
+        audio.startProcessingSinewaveForPlayback(withFreq: sender.value)
+    }
+    
+    // periodically, update label with motion recognition
+    @objc
+    func updateMotion(){
+        let val = audio.getHandMotion()
+        switch(val) {
+        case 1:
+            freqLabel.text = "Hand moving away."
+            break
+        case 2:
+            freqLabel.text = "Hand moving towards."
+            break
+        default:
+            freqLabel.text = "No motion detected."
+        }
     }
     
     
@@ -73,7 +94,8 @@ class ThirdViewController: UIViewController {
     @objc
     func updateGraph(){
         self.graph?.updateGraph(
-            data: self.audio.fftData,
+            // zoomed in fft data
+            data: Array(self.audio.fftData[6130...6850]),
             forKey: "fft"
         )
         
@@ -81,11 +103,5 @@ class ThirdViewController: UIViewController {
             data: self.audio.timeData,
             forKey: "time"
         )
-        
-        
-        
     }
-    
-    
-
 }
