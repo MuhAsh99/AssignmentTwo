@@ -190,6 +190,11 @@ class AudioModel {
         return (Int)(frequency/Float(stride))
     }
     
+    // Returns volume in decibles of the played tone
+    func getFreqVolume() -> Float {
+        return fftData[getIndexFromFreq(frequency: self.sineFrequency)]
+    }
+    
     //==========================================
     // MARK: Private Properties
     private lazy var audioManager:Novocaine? = {

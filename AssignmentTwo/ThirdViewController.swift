@@ -79,13 +79,13 @@ class ThirdViewController: UIViewController {
         let val = audio.getHandMotion()
         switch(val) {
         case 1:
-            freqLabel.text = "Hand moving away."
+            freqLabel.text = String(format:"Hand moving away.\nVolume: %.1f dB\nFrequency: %.1f kHz",self.audio.getFreqVolume(), self.audio.sineFrequency/1000)
             break
         case 2:
-            freqLabel.text = "Hand moving towards."
+            freqLabel.text = String(format:"Hand moving closer.\nVolume: %.1f dB\nFrequency: %.1f kHz",self.audio.getFreqVolume(), self.audio.sineFrequency/1000)
             break
         default:
-            freqLabel.text = "No motion detected."
+            freqLabel.text = String(format:"No motion detected.\nVolume: %.1f dB\nFrequency: %.1f kHz",self.audio.getFreqVolume(), self.audio.sineFrequency/1000)
         }
     }
     
